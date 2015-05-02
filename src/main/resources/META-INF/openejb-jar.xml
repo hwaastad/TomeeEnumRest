@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://www.openejb.org/openejb-jar/1.1">
     <pojo-deployment  class-name="jaxrs-application">
         <properties>
-            cxf.jaxrs.providers = com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider
+            cxf.jaxrs.providers = com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider,com.fasterxml.jackson.jaxrs.base.JsonMappingExceptionMapper,com.fasterxml.jackson.jaxrs.base.JsonParseExceptionMapper
         </properties>
     </pojo-deployment>
 </openejb-jar>

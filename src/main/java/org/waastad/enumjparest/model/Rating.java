@@ -5,6 +5,7 @@
  */
 package org.waastad.enumjparest.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
@@ -13,15 +14,28 @@ import com.fasterxml.jackson.annotation.JsonValue;
  */
 public enum Rating {
 
-    UNRATED(0), G(1), PG(2);
-    private final int value;
+    UNRATED(1), G(2), PG(3);
+    private final Integer value;
 
-    private Rating(int value) {
+    private Rating(Integer value) {
         this.value = value;
     }
 
+    @JsonCreator
+    public static Rating create(Integer value) {
+        if (value == null) {
+            throw new IllegalArgumentException();
+        }
+        for (Rating r : values()) {
+            if (value.equals(r.getValue())) {
+                return r;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
     @JsonValue
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 

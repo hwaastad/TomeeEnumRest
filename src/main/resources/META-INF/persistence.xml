@@ -6,6 +6,7 @@
     <jta-data-source>demoDS</jta-data-source>
     <non-jta-data-source>demoNonJtaDS</non-jta-data-source>
     <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

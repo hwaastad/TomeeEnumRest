@@ -5,6 +5,7 @@
  */
 package org.waastad.enumjparest.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.waastad.enumjparest.model.Rating;
@@ -33,15 +35,24 @@ public class Movie implements Serializable {
     @NotNull
     @Basic
     private String name;
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Rating rating;
 
     public Movie() {
     }
 
+    public Movie(String name) {
+        this.name = name;
+    }
+
     public Movie(String name, Rating rating) {
         this.name = name;
         this.rating = rating;
+    }
+
+    public Movie(String name, String rating) {
+        this.name = name;
+        this.rating = Rating.valueOf(rating);
     }
 
     public Long getId() {

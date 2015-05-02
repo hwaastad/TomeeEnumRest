@@ -5,9 +5,12 @@
  */
 package org.waastad.enumjparest.service;
 
+import java.util.List;
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -34,6 +37,8 @@ public class RatingService {
     @POST
     public Response addMovie(@Valid @NotNull Movie movie) {
         em.persist(movie);
-        return Response.ok().build();
+        TypedQuery<Movie> createQuery = em.createQuery("SELECT t FROM Movie t",Movie.class);
+        List<Movie> resultList = createQuery.getResultList();
+        return Response.ok(resultList).build();
     }
 }
